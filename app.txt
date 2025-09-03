@@ -1,0 +1,41 @@
+from flask import Flask, render_template, request, send_file
+import os
+from werkzeug.utils import secure_filename
+from pdfkit import from_file
+from PIL import Image
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['DOWNLOAD_FOLDER'] = 'downloads'
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+os.makedirs(app.config['DOWNLOAD_FOLDER'], exist_ok=True)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+# Word → PDF
+@app.route('/word_to_pdf', methods=['POST'])
+def word_to_pdf():
+    file = request.files['file']
+    filename = secure_filename(file.filename)
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file.save(filepath)
+    pdf_path = os.path.join(app.config['DOWNLOAD_FOLDER'], filename.rsplit('.',1)[0]+'.pdf')
+    from_file(filepath, pdf_path)
+    return send_file(pdf_path, as_attachment=True)
+
+# JPG → PDF
+@app.route('/img_to_pdf', methods=['POST'])
+def img_to_pdf():
+    file = request.files['file']
+    filename = secure_filename(file.filename)
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file.save(filepath)
+    pdf_path = os.path.join(app.config['DOWNLOAD_FOLDER'], filename.rsplit('.',1)[0]+'.pdf')
+    image = Image.open(filepath).convert('RGB')
+    image.save(pdf_path, "PDF")
+    return send_file(pdf_path, as_attachment=True)
+
+if __name__ == '__main__':
+    app.run(debug=True)

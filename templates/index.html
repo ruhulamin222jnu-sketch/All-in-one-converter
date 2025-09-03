@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All-in-One File Converter</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #f8f9fa; }
+    h2 { font-weight: bold; }
+    .converter-card {
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      height: 100%;
+    }
+    .converter-card:hover {
+      transform: translateY(-5px);
+    }
+    .card-header {
+      font-weight: bold;
+      background: #0d6efd;
+      color: white;
+      border-radius: 15px 15px 0 0 !important;
+    }
+    .btn-primary {
+      border-radius: 50px;
+    }
+  </style>
+</head>
+<body>
+<div class="container py-5">
+  <h2 class="text-center mb-5">📂 All-in-One File Converter Dashboard</h2>
+
+  <div class="row g-4">
+
+    <!-- DOCX → PDF -->
+    <div class="col-md-4">
+      <div class="card converter-card">
+        <div class="card-header text-center">DOCX ➝ PDF</div>
+        <div class="card-body text-center">
+          <form action="/word_to_pdf" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control my-2" required>
+            <button class="btn btn-primary w-100">Convert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- PDF → DOCX -->
+    <div class="col-md-4">
+      <div class="card converter-card">
+        <div class="card-header text-center">PDF ➝ DOCX</div>
+        <div class="card-body text-center">
+          <form action="/pdf_to_word" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control my-2" required>
+            <button class="btn btn-primary w-100">Convert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Excel → PDF -->
+    <div class="col-md-4">
+      <div class="card converter-card">
+        <div class="card-header text-center">Excel ➝ PDF</div>
+        <div class="card-body text-center">
+          <form action="/excel_to_pdf" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control my-2" required>
+            <button class="btn btn-primary w-100">Convert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- PPT → PDF -->
+    <div class="col-md-4">
+      <div class="card converter-card">
+        <div class="card-header text-center">PowerPoint ➝ PDF</div>
+        <div class="card-body text-center">
+          <form action="/ppt_to_pdf" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control my-2" required>
+            <button class="btn btn-primary w-100">Convert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image → PDF -->
+    <div class="col-md-4">
+      <div class="card converter-card">
+        <div class="card-header text-center">Image ➝ PDF</div>
+        <div class="card-body text-center">
+          <form action="/img_to_pdf" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control my-2" required>
+            <button class="btn btn-primary w-100">Convert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- PDF → Image -->
+    <div class="col-md-4">
+      <div class="card converter-card">
+        <div class="card-header text-center">PDF ➝ Images (ZIP)</div>
+        <div class="card-body text-center">
+          <form action="/pdf_to_img" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control my-2" required>
+            <button class="btn btn-primary w-100">Convert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- CSV → DOCX -->
+    <div class="col-md-4">
+      <div class="card converter-card">
+        <div class="card-header text-center">CSV ➝ DOCX</div>
+        <div class="card-body text-center">
+          <form action="/csv_to_doc" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control my-2" required>
+            <button class="btn btn-primary w-100">Convert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCX → CSV -->
+    <div class="col-md-4">
+      <div class="card converter-card">
+        <div class="card-header text-center">DOCX ➝ CSV</div>
+        <div class="card-body text-center">
+          <form action="/doc_to_csv" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control my-2" required>
+            <button class="btn btn-primary w-100">Convert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- JPG → PNG -->
+    <div class="col-md-4">
+      <div class="card converter-card">
+        <div class="card-header text-center">JPG ➝ PNG</div>
+        <div class="card-body text-center">
+          <form action="/jpg_to_png" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control my-2" required>
+            <button class="btn btn-primary w-100">Convert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
