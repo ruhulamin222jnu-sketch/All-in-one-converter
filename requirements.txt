@@ -33,3 +33,12 @@ pdfplumber
 Pillow
 python-pptx
 PyMuPDF
+Flask
+pandas
+fpdf
+python-docx
+pdfplumber
+python-pptx
+Pillow
+PyMuPDF
+
