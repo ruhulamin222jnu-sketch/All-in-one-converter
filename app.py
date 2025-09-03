@@ -180,9 +180,13 @@ def jpg_to_png():
     image.save(img_path, "PNG")
     return send_file(img_path, as_attachment=True)
 
+
+    
+
 @app.route("/")
 def index():
-    return "File Converter API is running!"
+    return render_template("index.html")
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
