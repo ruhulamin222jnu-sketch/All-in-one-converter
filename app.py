@@ -9,6 +9,7 @@ import shutil
 import pdfplumber
 import fitz  # PyMuPDF
 from fpdf import FPDF
+from docx2pdf import convert  # <-- new import
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -25,17 +26,13 @@ def word_to_pdf():
     file.save(filepath)
 
     pdf_path = os.path.join(app.config['DOWNLOAD_FOLDER'], filename.rsplit('.',1)[0]+'.pdf')
-    doc = Document(filepath)
 
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_auto_page_break(auto=True, margin=15)
-    pdf.set_font("Arial", size=12)
+    try:
+        # Convert DOCX to PDF with formatting preserved
+        convert(filepath, pdf_path)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
-    for para in doc.paragraphs:
-        pdf.multi_cell(0, 10, para.text)
-
-    pdf.output(pdf_path)
     return send_file(pdf_path, as_attachment=True)
 
 # ----------------- PDF → DOCX -----------------
@@ -180,13 +177,10 @@ def jpg_to_png():
     image.save(img_path, "PNG")
     return send_file(img_path, as_attachment=True)
 
-
-    
-
+# ----------------- Home -----------------
 @app.route("/")
-def index():
+def home():
     return render_template("index.html")
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
